@@ -24,7 +24,8 @@ class YoutubeSpider(scrapy.Spider):
     def __init__(self):
         # self.driver = webdriver.Chrome(constant.DRIVER_PATH_AT_SPIDER)
         chrome_options = Options()
-        # chrome_options.add_argument("--headless") # Run Selenium in headless mode
+        # chrome_options.add_argument("--headless")
+        #  # Run Selenium in headless mode
         self.driver = webdriver.Chrome(
             executable_path=constant.DRIVER_PATH_AT_SPIDER,
             chrome_options=chrome_options
@@ -35,7 +36,8 @@ class YoutubeSpider(scrapy.Spider):
         self.driver.get(response.url)
 
         # Search for a keyword (e.g., "live stream")
-        search_input = self.driver.find_element(By.XPATH, '//*[@id="search"]//input[@id="search"]')
+        search_input = self.driver.find_element(
+            By.XPATH, '//*[@id="search"]//input[@id="search"]')
         search_input.send_keys('live stream')
         time.sleep(1)
         search_input.send_keys(Keys.ENTER)
@@ -43,7 +45,8 @@ class YoutubeSpider(scrapy.Spider):
         time.sleep(5)
         # Scroll down to load more videos
         for i in range(20):
-            self.driver.execute_script("window.scrollTo(0, document.documentElement.scrollHeight);")
+            self.driver.execute_script(
+                "window.scrollTo(0, document.documentElement.scrollHeight);")
             self.driver.implicitly_wait(5)
             time.sleep(3)
 
@@ -52,7 +55,8 @@ class YoutubeSpider(scrapy.Spider):
         sel = Selector(text=html)
         videos = sel.xpath('//*[@id="contents"]/ytd-video-renderer')
         for video in videos:
-            if video.xpath(".//span[@class='style-scope ytd-badge-supported-renderer']/text()").get() != 'LIVE':
+            if video.xpath(
+                ".//span[@class='style-scope ytd-badge-supported-renderer']/text()").get() != 'LIVE':
                 continue
 
             title = video.xpath('.//a[@id="video-title"]/@title').extract()

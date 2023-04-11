@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Website Login Checker</title>
+  </head>
+  <body>
+    <h2>Check if login is required for a website</h2>
+    <form method="POST" action="/site">
+      <label for="url">URL:</label>
+      <input type="text" id="url" name="url" required><br><br>
+      <label for="login_required">Login required:</label>
+      <input type="checkbox" id="login_required" name="login_required" value="True"><br><br>
+      <div id="login_fields">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username"><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br><br>
+      </div>
+      <input type="submit" value="Submit">
+    </form>
+  </body>
+  <script>
+    document.getElementById('login_required').addEventListener('change', function() {
+      if (this.checked) {
+        document.getElementById('login_fields').style.display = 'block';
+      } else {
+        document.getElementById('login_fields').style.display = 'none';
+      }
+    });
+  </script>
+</html>
