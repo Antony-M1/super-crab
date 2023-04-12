@@ -36,9 +36,9 @@ class SuperSpider(scrapy.Spider):
         if site_data.get('is_login_required'):
             self.login()
 
-        search_box, xpath = self.find_search_box()
+        search_box, xpath = self.find_search_box(response)
         if search_box:
-            pass
+            self.pass_search_query(response, xpath)
         else:
             """
             if there is no search box checking any other
@@ -53,16 +53,19 @@ class SuperSpider(scrapy.Spider):
     def login(self):
         pass
 
-    def find_search_box(self):
+    def find_search_box(self, response):
         """
         The search element should be a input tag
         and also there will be 'search' will present in the tag
         """
         for xpath in constant.SEARCH_BOX_XPATH:
             try:
-                search_box = self.driver.find_element(By.XPATH, xpath)
+                search_box = response.selector.xpath(xpath)
                 if search_box:
                     return True, xpath
             except NoSuchElementException:
                 continue
         return False, None
+
+    def pass_search_query(response, xpath):
+        pass

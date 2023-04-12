@@ -5,7 +5,8 @@ from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 
 
-mongo_uri = f"mongodb+srv://{os.environ.get('MONGODB_USERNAME')}:{os.environ.get('MONGODB_PASSWORD')}@cluster0.s8odi72.mongodb.net/?retryWrites=true&w=majority"
+# mongo_uri = f"mongodb+srv://{os.environ.get('MONGODB_USERNAME')}:{os.environ.get('MONGODB_PASSWORD')}@cluster0.s8odi72.mongodb.net/?retryWrites=true&w=majority"
+mongo_uri = f"mongodb://{os.environ.get('MONGODB_USERNAME_LOCAL')}:{os.environ.get('MONGODB_PASSWORD_LOCAL')}@localhost:27017/?retryWrites=true&w=majority"
 
 client = MongoClient(mongo_uri)
 
