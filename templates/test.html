@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Red-themed Navbar and Form</title>
+	<style>
+		body {
+			background-color: #f5f5f5;
+		}
+		.navbar {
+			background-color: #ff3333;
+			padding: 10px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			color: white;
+			font-size: 1.2em;
+			font-weight: bold;
+		}
+		.navbar a {
+			color: white;
+			text-decoration: none;
+		}
+		form {
+			background-color: white;
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			margin-top: 50px;
+			width: 500px;
+			margin: auto;
+		}
+		label {
+			display: block;
+			margin-bottom: 10px;
+			font-weight: bold;
+		}
+		input[type="text"], input[type="password"], input[type="checkbox"] {
+			display: block;
+			width: 100%;
+			padding: 10px;
+			border-radius: 5px;
+			border: none;
+			margin-bottom: 20px;
+			font-size: 1.2em;
+		}
+		input[type="submit"] {
+			background-color: #ff3333;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			font-size: 1.2em;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<nav class="navbar">
+		<a href="#"><img src="home-icon.png" alt="Home"></a>
+	</nav>
+	<form>
+		<label for="url">URL:</label>
+		<input type="text" id="url" name="url">
+
+		<label for="login-required">Login Required:</label>
+		<input type="checkbox" id="login-required" name="login-required">
+
+		<label for="username">Username:</label>
+		<input type="text" id="username" name="username">
+
+		<label for="password">Password:</label>
+		<input type="password" id="password" name="password">
+
+		<input type="submit" value="Submit">
+	</form>
+</body>
+</html>

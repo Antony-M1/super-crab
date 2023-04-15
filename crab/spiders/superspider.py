@@ -1,4 +1,5 @@
 import scrapy
+import time
 from app import get_allowed_domains_and_start_urls, get_name_from_url
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -67,5 +68,23 @@ class SuperSpider(scrapy.Spider):
                 continue
         return False, None
 
-    def pass_search_query(response, xpath):
-        pass
+    def pass_search_query(self, response, xpath):
+        search_box = self.driver.find_element(By.XPATH, xpath)
+
+        for key in constant.SEARCH_KEY:
+            # pass the key in the search box
+            search_box.send_keys(key)
+            self.driver.implicitly_wait(2)
+
+            # Hit the enter Button
+            search_box.send_keys(Keys.ENTER)
+            self.driver.implicitly_wait(5)
+
+            # Load the page till the bottom of the page
+            for i in range(constant.PAGE_LOAD_LOOP):
+                self.driver.execute_script(
+                    "window.scrollTo(0, document.documentElement.scrollHeight);"
+                )
+                self.driver.implicitly_wait(5)
+
+        

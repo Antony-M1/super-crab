@@ -1,5 +1,9 @@
 import re
-from flask import Flask, render_template, request, jsonify
+import bson
+from flask import (
+    Flask, render_template, request, jsonify, send_from_directory,
+    redirect, url_for
+)
 import os
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
@@ -14,7 +18,21 @@ db = client['crab']  # database name
 sites = db['sites']  # collection name
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
+
+
+@app.route('/static/images/<path:path>')
+def send_image(path):
+    return send_from_directory('static/images', path)
+
+
+@app.route('/')
+def home():
+    _sites = sites.find()
+    data = []
+    for site in _sites:
+        data.append(site)
+    return render_template('site2.html', site_data=data)
 
 
 def get_name_from_url(url: str) -> str:
@@ -39,14 +57,14 @@ def get_allowed_domains_and_start_urls() -> list[str]:
     return allowed_domains, start_urls, data
 
 
-@app.route('/site', methods=['GET', 'POST'])
+@app.route('/site', methods=['GET', 'POST', 'DELETE'])
 def site():
     if request.method == 'POST':
 
         data = {
             'name': get_name_from_url(request.form.get('url')),
             'url': request.form.get('url'),
-            'is_login_required': request.form.get('is_login_required', False),
+            'is_login_required': bool(request.form.get('is_login_required', False)),
             'credentials': {
                 'username': request.form.get('username', None),
                 'password': request.form.get('password', None),
@@ -56,8 +74,31 @@ def site():
         sites.insert_one(data)
         data['_id'] = str(data['_id'])
 
-        return jsonify(data)
-    return render_template('site.html')
+        return redirect(url_for('home'))  # put the funtion name
+
+    if request.method == 'DELETE':
+        c = 1
+    return redirect(url_for('home'))
+
+
+@app.route('/delete-site', methods=['POST'])
+def delete_site():
+    id = bson.ObjectId(request.form.get('site_id'))
+    result = sites.delete_one({'_id': id})
+    if not result.deleted_count:
+        return render_template('something_wrong.html')
+    return redirect(url_for('home'))
+
+
+@app.route('/check-url', methods=['GET'])
+def check_url():
+    url = request.args.get('url')
+    name = get_name_from_url(url)
+    result = sites.find_one({'name': name})
+    if result is not None:
+        return jsonify({'status': 'error', 'message': 'URL already exists in the database'})
+    else:
+        return jsonify({'status': 'success', 'message': 'URL is available'})
 
 
 if __name__ == '__main__':
