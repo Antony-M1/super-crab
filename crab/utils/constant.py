@@ -13,6 +13,9 @@ YOUTUBE_SIGNIN_PAGE = "https://accounts.google.com/v3/signin/identifier?dsh=S102
 # YOUTUBE_SIGNIN_PAGE = "https://www.google.com/"
 
 
+PAGE_LOAD_LOOP = 10
+
+
 SEARCH_KEY = [
     'live',
     'live now',

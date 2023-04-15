@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% block title %}My Page Title{% endblock %} {% block
+content %}
+<div class="card my-3 shadow-lg p-3 mb-5 bg-body rounded" style="max-width: 540px">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img
+        src="{{ url_for('send_image', path='oops.jpeg') }}"
+        class="img-fluid rounded-start"
+        alt="Oops"
+      />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Oops</h5>
+        <p>Something went wrong. We apologize for the inconvenience.</p>
+        <p>Please try again later.</p>
+        <a href="{{ url_for('home') }}">Go to home page</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
