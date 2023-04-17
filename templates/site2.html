@@ -13,6 +13,7 @@ content %}
           class="form-control"
           id="url"
           placeholder="Enter URL"
+          required
         />
       </div>
       <div class="mb-3 form-check">
@@ -46,7 +47,9 @@ content %}
           placeholder="Enter password"
         />
       </div>
-      <button id="add-site-submit-form" type="submit" class="btn btn-primary">Submit</button>
+      <button id="add-site-submit-form" type="submit" class="btn btn-primary">
+        Submit
+      </button>
     </form>
   </div>
   <div class="col border border-success">
@@ -83,6 +86,24 @@ content %}
                   Delete
                 </button>
               </form>
+            </div>
+            <div class="col-2">
+              <button type="button" class="btn btn-sm btn-outline-success" data-url="{{site.url}}">
+                <i class="bi bi-box-arrow-up-right"></i>
+                Go To
+              </button>
+            </div>
+            <div class="col-2">
+              <button type="button" class="btn btn-sm btn-outline-success">
+                <i class="bi bi-cloud-download"></i>
+                Fetch
+              </button>
+            </div>
+            <div class="col-2">
+              <button id="view-site-data" type="button" class="btn btn-sm btn-outline-secondary" data-name="{{ site.name }}">
+                <i class="bi bi-view-list"></i>
+                View
+              </button>
             </div>
           </div>
         </div>
@@ -125,6 +146,21 @@ content %}
           <button type="submit" class="btn btn-danger">Delete</button>
         </form>
       </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- toast -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+  <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header  bg-primary text-white">
+      <i class="bi bi-bell rounded me-2"></i>
+      <strong class="me-auto">Notification</strong>
+      <button type="button" class="btn-close bg-danger" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      <!-- Message Here -->
     </div>
   </div>
 </div>

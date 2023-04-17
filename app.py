@@ -2,7 +2,7 @@ import re
 import bson
 from flask import (
     Flask, render_template, request, jsonify, send_from_directory,
-    redirect, url_for
+    redirect, url_for, send_file
 )
 import os
 from pymongo import MongoClient
@@ -81,12 +81,22 @@ def site():
     return redirect(url_for('home'))
 
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_file('static/images/favicon.ico', mimetype='image/vnd.microsoft.icon')
+
+
+@app.route('/oops')
+def oops():
+    return render_template('something_wrong.html')
+
+
 @app.route('/delete-site', methods=['POST'])
 def delete_site():
     id = bson.ObjectId(request.form.get('site_id'))
     result = sites.delete_one({'_id': id})
     if not result.deleted_count:
-        return render_template('something_wrong.html')
+        return redirect(url_for('oops'))
     return redirect(url_for('home'))
 
 
@@ -96,9 +106,14 @@ def check_url():
     name = get_name_from_url(url)
     result = sites.find_one({'name': name})
     if result is not None:
-        return jsonify({'status': 'error', 'message': 'URL already exists in the database'})
+        return jsonify({'status': 'error', 'message': 'URL already exists'})
     else:
         return jsonify({'status': 'success', 'message': 'URL is available'})
+
+
+@app.route('/view/<name>')
+def view_site_data(name: str):
+    return render_template('progress.html')
 
 
 if __name__ == '__main__':

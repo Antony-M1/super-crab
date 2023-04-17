@@ -4,15 +4,15 @@ content %}
   <div class="row g-0">
     <div class="col-md-4">
       <img
-        src="{{ url_for('send_image', path='oops.jpeg') }}"
-        class="img-fluid rounded-start"
-        alt="Oops"
+        src="{{ url_for('send_image', path='progress.jpeg') }}"
+        class="img-fluid rounded-start mt-3"
+        alt="Progress"
       />
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h5 class="card-title">Oops</h5>
-        <p>Something went wrong. We apologize for the inconvenience.</p>
+        <h5 class="card-title">In Progress</h5>
+        <i>Rome wasn't built in a day, and neither is a great website.</i>
         <p>Please try again later.</p>
         <a href="{{ url_for('home') }}">Go to home page</a>
       </div>
