@@ -53,6 +53,32 @@ $(document).ready(function () {
   });
 });
 
+$(document).ready(function () {
+  $("#is_login_required").change(function () {
+    const loginFields = document.getElementById("login_fields");
+    if (this.checked) {
+      loginFields.style.display = "block";
+    } else {
+      loginFields.style.display = "none";
+    }
+  });
+});
+
+// get the checkbox element and login-fields div element
+// var isLoginRequiredCheckbox = document.getElementById("is_login_required");
+// var loginFields = document.getElementById("login-fields");
+// console.log(isLoginRequiredCheckbox, loginFields);
+// // add event listener to checkbox element to show/hide login fields
+// isLoginRequiredCheckbox.addEventListener("change", function() {
+//   if (this.checked) {
+//     loginFields.style.display = "block";
+//   } else {
+//     loginFields.style.display = "none";
+//   }
+// });
+
+
+
 
 function isValidUrl(url) {
   try {

@@ -2,7 +2,7 @@
 content %}
 <br />
 <div class="row">
-  <div class="col border border-primary">
+  <div id="site_form" class="col border border-primary">
     <h3 class="my-3">Add site</h3>
     <form id="add-site-form" action="/site" method="POST" class="p-4">
       <div class="mb-3">
@@ -27,24 +27,88 @@ content %}
           >Login required</label
         >
       </div>
+
+      <!-- Show if is_login_required -->
+      <div id="login_fields" style="display: none; background-color: antiquewhite;">
+        <div id="login_fields" class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input
+            type="text"
+            name="username"
+            class="form-control"
+            id="username"
+            placeholder="Enter username"
+          />
+        </div>
+        <div id="login_fields" class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            name="password"
+            class="form-control"
+            id="password"
+            placeholder="Enter password"
+          />
+        </div>
+      </div>
       <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
+        <label for="search_xpath" class="form-label">Search XPATH</label>
         <input
           type="text"
-          name="username"
+          name="search_xpath"
           class="form-control"
-          id="username"
-          placeholder="Enter username"
+          id="search_xpath"
+          placeholder="Enter Search XPATH"
         />
       </div>
       <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
+        <label for="video_block_xpath" class="form-label">Video Block XPATH</label>
         <input
-          type="password"
-          name="password"
+          type="text"
+          name="video_block_xpath"
           class="form-control"
-          id="password"
-          placeholder="Enter password"
+          id="video_block_xpath"
+          placeholder="Enter Search XPATH"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="video_title_xpath" class="form-label">Video Title XPATH</label>
+        <input
+          type="text"
+          name="video_title_xpath"
+          class="form-control"
+          id="video_title_xpath"
+          placeholder="Enter Search XPATH"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="video_description_xpath" class="form-label">Video Description XPATH</label>
+        <input
+          type="text"
+          name="video_description_xpath"
+          class="form-control"
+          id="video_description_xpath"
+          placeholder="Enter Search XPATH"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="video_live_stream_url_xpath" class="form-label">Video live stream URL XPATH</label>
+        <input
+          type="text"
+          name="video_live_stream_url_xpath"
+          class="form-control"
+          id="video_live_stream_url_xpath"
+          placeholder="Enter Search XPATH"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="video_thumnail_xpath" class="form-label">Video Thumbnail XPATH</label>
+        <input
+          type="text"
+          name="video_thumnail_xpath"
+          class="form-control"
+          id="video_thumnail_xpath"
+          placeholder="Enter Search XPATH"
         />
       </div>
       <button id="add-site-submit-form" type="submit" class="btn btn-primary">
