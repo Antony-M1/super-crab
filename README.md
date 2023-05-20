@@ -1,6 +1,9 @@
 # Super C R A B
 Super C R A B is crawling project that will extract the live stream data from the different sites.
 
+![image](https://github.com/Antony-M1/super-crab/assets/96291963/049b7e80-2711-4076-ba32-de84fe7eb723)
+
+
 ### Prerequisites
 * [Python 3.10](https://www.python.org/downloads/)
 * [mongodb](https://github.com/Antony-M1/mongodb-docker)
